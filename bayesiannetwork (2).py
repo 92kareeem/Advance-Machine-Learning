@@ -46,7 +46,7 @@ query_result = inference.query(variables=['HeartDisease'],
 print(query_result)
 
 import networkx as nx
-
+import matplotlib.pyplot as plt
 model = BayesianNetwork([
     ('Age', 'Gender'),
     ('Gender', 'HeartDisease'),
@@ -57,5 +57,9 @@ G = nx.DiGraph()
 G.add_nodes_from(model.nodes())
 G.add_edges_from(model.edges())
 
-nx.draw_networkx(G, with_labels=True)
+pos=nx.spring_layout(G)
+plt.figure(figsize=(10,10))
+nx.draw(G, with_labels=True, node_size=4000,node_color='lightblue', font_size=16,font_color="black",font_weight="bold",arrowsize=20)
+plt.title("Bayesian Network Structure for Heart Disease Diagnosis")
+plt.show()
 
